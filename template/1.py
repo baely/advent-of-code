@@ -2,7 +2,7 @@ lines: list[str] = None
 nums: list[int] = None
 
 with open("input.txt") as f:
-    lines = [l[:-1] for l in f.readlines()]
+    lines = [line.strip() for line in f.read().split() if line and not line.isspace()]
     # nums = list(map(int, lines))
 
 for line in lines:
