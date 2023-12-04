@@ -18,7 +18,7 @@ for line in lines:
     win_set = set(map(int, wins))
     my_set = set(map(int, mines))
 
-    match = my_set  & win_set
+    match = my_set & win_set
 
     if len(match) == 0:
         continue
