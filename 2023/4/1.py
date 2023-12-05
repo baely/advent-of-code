@@ -23,7 +23,7 @@ for line in lines:
     if len(match) == 0:
         continue
 
-    pt = 2 ** (len(my_set & win_set) -1)
+    pt = 2 ** (len(my_set & win_set) - 1)
 
     pts.append(pt)
 
