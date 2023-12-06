@@ -15,9 +15,7 @@ for time, distance in zip(times, distances):
 
     for i in range(time):
         time_held = i
-        # this_distance = (time - time_held) * time_held
-
-        distance = (time - i) * i - distance
+        this_distance = (time - time_held) * time_held
 
         if this_distance > distance:
             possible_ways += 1
