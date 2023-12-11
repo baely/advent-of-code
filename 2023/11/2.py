@@ -43,5 +43,3 @@ for m in range(len(points)):
         d.append(dist)
 
 print(sum(d))
-
-print(sum(sum(abs(points[m][0])+abs() for n in range(m+1,lp))for m in range(lp)))
