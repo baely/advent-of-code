@@ -32,8 +32,6 @@ for i, line in enumerate(lines):
 
 d = []
 
-lp = len(points)
-
 for m in range(len(points)):
     for n in range(m+1, len(points)):
         mi, mj = points[m]
