@@ -9,52 +9,52 @@ with open("input.txt") as f:
 
 min_to = dict()
 
-q: dict[int, set] = {
+queue: dict[int, set] = {
     0: {((0, 0), (0, 0), 0)}
 }
 
 found = False
 
 while not found:
-    heat = min([k for k in q.keys() if q[k]])
-    while q[heat]:
-        (i, j), (vi, vj), d = q[heat].pop()
+    heat = min([k for k in queue.keys() if queue[k]])
+    while queue[heat]:
+        (i, j), (vel_i, vel_j), distance = queue[heat].pop()
 
         if (i, j) == (len(nums) - 1, len(nums[0]) - 1):
             found = True
             break
 
-        for m in movements:
-            mi, mj = m
-            ni, nj = i + mi, j + mj
-            nk = (ni, nj)
+        for movement in movements:
+            movement_i, movement_j = movement
+            new_i, new_j = i + movement_i, j + movement_j
+            new_pos = (new_i, new_j)
 
-            if not 0 <= ni < len(nums) or not 0 <= nj < len(nums[0]):
+            if not 0 <= new_i < len(nums) or not 0 <= new_j < len(nums[0]):
                 continue
 
-            nh = heat + nums[ni][nj]
+            new_heat = heat + nums[new_i][new_j]
 
-            nd = 1
-            if m == (-vi, -vj):
+            new_distance = 1
+            if movement == (-vel_i, -vel_j):
                 continue
 
-            if m == (vi, vj):
-                if d == 3:
+            if movement == (vel_i, vel_j):
+                if distance == 3:
                     continue
-                nd = d + 1
+                new_distance = distance + 1
 
-            v = (nk, m, nd)
+            pos_mov_dist = (new_pos, movement, new_distance)
 
-            if v in min_to:
-                if min_to[v] <= nh:
+            if pos_mov_dist in min_to:
+                if min_to[pos_mov_dist] <= new_heat:
                     continue
 
-                q[min_to[v]].remove(v)
+                queue[min_to[pos_mov_dist]].remove(pos_mov_dist)
 
-            min_to[v] = nh
+            min_to[pos_mov_dist] = new_heat
 
-            if nh not in q:
-                q[nh] = set()
-            q[nh].add(v)
+            if new_heat not in queue:
+                queue[new_heat] = set()
+            queue[new_heat].add(pos_mov_dist)
 
 print(heat)
