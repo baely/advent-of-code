@@ -1,3 +1,4 @@
+import math
 from time import perf_counter_ns
 
 with open("input.txt") as f:
@@ -9,6 +10,8 @@ start = perf_counter_ns()
 for line in lines:
     ...
 
-
 end = perf_counter_ns()
-print(f"duration: {(end-start)/10**6:.2f}ms")
+t = end - start
+precision = min(3 * math.floor(math.log(t) / math.log(10) / 3), 9)
+unit = ["ns", "μs", "ms", "s"][precision//3]
+print(f"duration: {t/10**precision:.3f}{unit}")
