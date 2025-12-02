@@ -10,7 +10,7 @@ public class Solution1 {
 
     public static String[] readInput() {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("input.txt"));
+            List<String> lines = Files.readAllLines(Paths.get("./YYYY/DD/input.txt"));
             return lines.toArray(new String[0]);
         } catch (IOException e) {
             e.printStackTrace();
