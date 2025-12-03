@@ -1,25 +1,16 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+void solve(List<String> input) {
+    //
+}
 
-public class Solution1 {
-    public static void solve(String[] input) {
-        //
+List<String> readInput() {
+    try {
+        return Files.readAllLines(Paths.get("./YYYY/DD/input.txt"));
+    } catch (IOException e) {
+        e.printStackTrace();
+        return List.of();
     }
+}
 
-    public static String[] readInput() {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get("./YYYY/DD/input.txt"));
-            return lines.toArray(new String[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new String[0];
-        }
-    }
-
-    public static void main(String[] args) {
-        String[] input = readInput();
-        solve(input);
-    }
+void main() {
+    solve(readInput());
 }

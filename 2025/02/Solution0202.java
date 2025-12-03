@@ -1,62 +1,53 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+void solve(List<String> input) {
+    long invalidSum = 0;
 
-public class Solution0202 {
-    public static void solve(String[] input) {
-        long invalidSum = 0;
+    for (String line : input) {
+        for (String range : line.split(",")) {
+            String left, right;
 
-        for (String line : input) {
-            for (String range : line.split(",")) {
-                String left, right;
+            left = range.split("-")[0];
+            right = range.split("-")[1];
 
-                left = range.split("-")[0];
-                right = range.split("-")[1];
+            long leftInt = Long.parseLong(left);
+            long rightInt = Long.parseLong(right);
 
-                long leftInt = Long.parseLong(left);
-                long rightInt = Long.parseLong(right);
-
-                for (long x = leftInt; x <= rightInt; x++) {
-                    if (!isValid(String.valueOf(x))) {
-                        invalidSum += x;
-                    }
+            for (long x = leftInt; x <= rightInt; x++) {
+                if (!isValid(String.valueOf(x))) {
+                    invalidSum += x;
                 }
             }
         }
-
-        System.out.println(invalidSum);
     }
 
-    private static boolean isValid(String num) {
-        for (int i = 1; i < num.length(); i++) {
-            if (num.length() % i != 0) continue;
+    System.out.println(invalidSum);
+}
 
-            int repeats = num.length() / i;
+boolean isValid(String num) {
+    for (int i = 1; i < num.length(); i++) {
+        if (num.length() % i != 0) continue;
 
-            String pattern = num.substring(0, i);
-            String full = pattern.repeat(repeats);
+        int repeats = num.length() / i;
 
-            if (num.equals(full)) {
-                return false;
-            }
-        }
+        String pattern = num.substring(0, i);
+        String full = pattern.repeat(repeats);
 
-        return true;
-    }
-
-    public static String[] readInput() {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get("./2025/02/input.txt"));
-            return lines.toArray(new String[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new String[0];
+        if (num.equals(full)) {
+            return false;
         }
     }
 
-    public static void main(String[] args) {
-        String[] input = readInput();
-        solve(input);
+    return true;
+}
+
+List<String> readInput() {
+    try {
+        return Files.readAllLines(Paths.get("./2025/02/input.txt"));
+    } catch (IOException e) {
+        e.printStackTrace();
+        return List.of();
     }
+}
+
+void main() {
+    solve(readInput());
 }
